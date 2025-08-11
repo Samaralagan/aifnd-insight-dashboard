@@ -26,16 +26,13 @@ import {
 } from "lucide-react";
 
 const navigationItems = [
-  { title: "Overview", url: "/dashboard/overview", icon: LayoutDashboard },
-  { title: "AI Device Discovery", url: "/dashboard/ai-discovery", icon: Search },
-  { title: "Smart Recommendations", url: "/dashboard/smart-recommendations", icon: Sparkles },
-  { title: "Tailored Settings", url: "/dashboard/tailored-settings", icon: Settings },
-  { title: "Real-Time Monitoring", url: "/dashboard/realtime-monitoring", icon: Activity },
+  { title: "AI-Powered Device Discovery", url: "/dashboard/ai-discovery", icon: Search },
+  { title: "Smart Categorization & Recommendations", url: "/dashboard/smart-recommendations", icon: Sparkles },
+  { title: "Tailored Device Settings", url: "/dashboard/tailored-settings", icon: Settings },
+  { title: "Real-Time Monitoring & Control", url: "/dashboard/realtime-monitoring", icon: Activity },
   { title: "Cross-Device Automation", url: "/dashboard/automation", icon: Zap },
   { title: "Integration Support", url: "/dashboard/integrations", icon: Plug },
   { title: "Security & Network Health", url: "/dashboard/security", icon: Shield },
-  { title: "Device Library", url: "/dashboard/device-library", icon: Library },
-  { title: "Contact Support", url: "/dashboard/contact-support", icon: HeadphonesIcon },
 ];
 
 export function AppSidebar() {
@@ -45,7 +42,7 @@ export function AppSidebar() {
   const currentPath = location.pathname;
 
   const isActive = (path: string) => {
-    if (path === "/dashboard/overview" && currentPath === "/dashboard") return true;
+    if (path === "/dashboard/ai-discovery" && currentPath === "/dashboard") return true;
     return currentPath === path;
   };
 

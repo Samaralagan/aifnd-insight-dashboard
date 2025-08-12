@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Sparkles, 
   Home, 
@@ -12,10 +14,23 @@ import {
   CheckCircle,
   Clock,
   Zap,
-  Star
+  Star,
+  X,
+  Loader2
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export function SmartRecommendations() {
+  const [selectedRecommendation, setSelectedRecommendation] = useState<any>(null);
+  const [setupProgress, setSetupProgress] = useState<{[key: string]: number}>({});
+  const { toast } = useToast();
   const categories = [
     {
       title: "Lighting Optimization",
@@ -115,6 +130,38 @@ export function SmartRecommendations() {
     if (confidence >= 90) return "text-success";
     if (confidence >= 80) return "text-warning";
     return "text-muted-foreground";
+  };
+
+  const learnMore = (recommendation: any) => {
+    setSelectedRecommendation(recommendation);
+  };
+
+  const applySetup = (recommendation: any) => {
+    setSetupProgress({...setupProgress, [recommendation.id]: 0});
+    
+    // Simulate setup progress
+    const steps = 5;
+    const stepTime = 1000;
+
+    for (let i = 1; i <= steps; i++) {
+      setTimeout(() => {
+        setSetupProgress(prev => ({...prev, [recommendation.id]: (i / steps) * 100}));
+        
+        if (i === steps) {
+          setTimeout(() => {
+            setSetupProgress(prev => {
+              const newProgress = {...prev};
+              delete newProgress[recommendation.id];
+              return newProgress;
+            });
+            toast({
+              title: "Setup Complete!",
+              description: `${recommendation.title} has been successfully configured and is now active.`
+            });
+          }, 500);
+        }
+      }, i * stepTime);
+    }
   };
 
   return (
@@ -231,13 +278,59 @@ export function SmartRecommendations() {
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                   <Badge variant="secondary">{recommendation.category}</Badge>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      Learn More
-                    </Button>
-                    <Button className="btn-primary" size="sm">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Apply Setup
-                    </Button>
+                    {setupProgress[recommendation.id] !== undefined ? (
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span className="text-sm font-body">Setting up... {Math.round(setupProgress[recommendation.id])}%</span>
+                      </div>
+                    ) : (
+                      <>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="sm" onClick={() => learnMore(recommendation)}>
+                              Learn More
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-md">
+                            <DialogHeader>
+                              <DialogTitle className="font-heading">{recommendation.title}</DialogTitle>
+                              <DialogDescription className="font-body">
+                                Detailed information and setup guidance
+                              </DialogDescription>
+                            </DialogHeader>
+                            <div className="space-y-4">
+                              <p className="text-sm font-body">{recommendation.description}</p>
+                              <div>
+                                <h4 className="font-medium text-sm mb-2">What you'll get:</h4>
+                                <ul className="space-y-1 text-sm text-muted-foreground">
+                                  <li>• Automated device coordination</li>
+                                  <li>• Energy optimization</li>
+                                  <li>• Enhanced convenience</li>
+                                  <li>• Intelligent scheduling</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-medium text-sm mb-2">Setup steps:</h4>
+                                <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
+                                  <li>Configure device connections</li>
+                                  <li>Set automation triggers</li>
+                                  <li>Define action sequences</li>
+                                  <li>Test and optimize</li>
+                                </ol>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        <Button 
+                          className="btn-primary" 
+                          size="sm"
+                          onClick={() => applySetup(recommendation)}
+                        >
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          Apply Setup
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/dashboard/AppSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { MobileSidebar } from "@/components/dashboard/MobileSidebar";
 import { AIDiscovery } from "@/components/dashboard/tabs/AIDiscovery";
 import { SmartRecommendations } from "@/components/dashboard/tabs/SmartRecommendations";
 import { TailoredSettings } from "@/components/dashboard/tabs/TailoredSettings";
@@ -16,9 +17,10 @@ const Dashboard = () => {
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
-        <div className="flex-1 flex flex-col">
+        <MobileSidebar />
+        <div className="flex-1 flex flex-col lg:ml-0">
           <DashboardHeader />
-          <main className="flex-1 p-6 overflow-auto">
+          <main className="flex-1 p-4 md:p-6 overflow-auto">
             <Routes>
               <Route index element={<AIDiscovery />} />
               <Route path="ai-discovery" element={<AIDiscovery />} />

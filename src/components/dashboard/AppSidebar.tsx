@@ -8,11 +8,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
-  LayoutDashboard,
   Search,
   Sparkles,
   Settings,
@@ -20,8 +18,6 @@ import {
   Zap,
   Plug,
   Shield,
-  Library,
-  HeadphonesIcon,
   Cpu
 } from "lucide-react";
 
@@ -36,8 +32,7 @@ const navigationItems = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
-  const collapsed = state === "collapsed";
+  const { open, openMobile } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -55,8 +50,8 @@ export function AppSidebar() {
 
   return (
     <Sidebar
-      className="border-r border-border bg-card/50 backdrop-blur-sm transition-all duration-300"
-      collapsible="icon"
+      className="border-r border-border bg-card/50 backdrop-blur-sm transition-all duration-300 hidden lg:flex lg:w-72"
+      collapsible="none"
     >
       {/* Header */}
       <div className="p-4 border-b border-border">
@@ -64,18 +59,16 @@ export function AppSidebar() {
           <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
             <Cpu className="w-4 h-4 text-white" />
           </div>
-          {!collapsed && (
-            <div>
-              <h2 className="font-heading font-bold text-lg">AIFND.net</h2>
-              <p className="text-xs text-muted-foreground font-body">IoT Management</p>
-            </div>
-          )}
+          <div>
+            <h2 className="font-heading font-bold text-lg">AIFND.net</h2>
+            <p className="text-xs text-muted-foreground font-body">IoT Management</p>
+          </div>
         </div>
       </div>
 
       <SidebarContent className="px-3 py-4">
         <SidebarGroup>
-          <SidebarGroupLabel className={`font-heading text-xs uppercase tracking-wider mb-3 ${collapsed ? 'sr-only' : ''}`}>
+          <SidebarGroupLabel className="font-heading text-xs uppercase tracking-wider mb-3">
             Navigation
           </SidebarGroupLabel>
           
@@ -90,11 +83,9 @@ export function AppSidebar() {
                       title={item.title}
                     >
                       <item.icon className="w-5 h-5 flex-shrink-0" />
-                      {!collapsed && (
-                        <span className="ml-3 truncate font-medium">
-                          {item.title}
-                        </span>
-                      )}
+                      <span className="ml-3 truncate font-medium">
+                        {item.title}
+                      </span>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -105,14 +96,12 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* Footer */}
-      {!collapsed && (
-        <div className="mt-auto p-4 border-t border-border">
-          <div className="text-xs text-muted-foreground font-body space-y-1">
-            <p>Version 2.1.0</p>
-            <p>© 2025 AIFND.net</p>
-          </div>
+      <div className="mt-auto p-4 border-t border-border">
+        <div className="text-xs text-muted-foreground font-body space-y-1">
+          <p>Version 2.1.0</p>
+          <p>© 2025 AIFND.net</p>
         </div>
-      )}
+      </div>
     </Sidebar>
   );
 }

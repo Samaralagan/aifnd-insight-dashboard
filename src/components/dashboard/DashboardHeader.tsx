@@ -16,28 +16,58 @@ import { useNavigate } from "react-router-dom";
 
 export function DashboardHeader() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // Clear any stored auth data
+    localStorage.removeItem('user');
     navigate("/login");
   };
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query.trim()) {
+      // Mock search results
+      const mockResults = [
+        "Smart Thermostat - Living Room",
+        "Philips Hue Lights - Bedroom", 
+        "Security Camera - Front Door",
+        "Motion Sensor - Hallway",
+        "Smart Lock - Main Entrance"
+      ].filter(item => item.toLowerCase().includes(query.toLowerCase()));
+      setSearchResults(mockResults);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   return (
-    <header className="h-16 border-b border-border bg-card/50 backdrop-blur-sm flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border bg-card/50 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
       {/* Left Section */}
       <div className="flex items-center gap-4">
-        <SidebarTrigger className="hover:bg-muted" />
+        {/* Spacer for mobile hamburger */}
+        <div className="w-9 lg:hidden"></div>
         
         {/* Search */}
-        <div className="relative w-80 max-w-sm">
+        <div className="relative w-full max-w-sm md:w-80">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search devices, automations..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
             className="pl-10 h-9 bg-muted/50 border-border/50 focus:bg-background font-body"
           />
+          {searchResults.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-md shadow-lg z-50 max-h-40 overflow-y-auto">
+              {searchResults.map((result, index) => (
+                <div key={index} className="p-2 hover:bg-muted cursor-pointer text-sm font-body">
+                  {result}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

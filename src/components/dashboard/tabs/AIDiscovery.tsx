@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useToast } from "@/hooks/use-toast";
 import { 
   Search, 
   Wifi, 
@@ -17,20 +16,8 @@ import {
   Camera,
   Speaker,
   Tv,
-  Shield,
-  X,
-  Zap,
-  Clock,
-  User
+  Shield
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 interface Device {
   id: string;
@@ -47,8 +34,6 @@ export function AIDiscovery() {
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const [discoveredDevices, setDiscoveredDevices] = useState<Device[]>([]);
-  const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
-  const { toast } = useToast();
 
   const deviceTypes = [
     { icon: Lightbulb, name: "Smart Lights", count: 8, color: "text-yellow-500" },
@@ -129,36 +114,12 @@ export function AIDiscovery() {
     }, 800);
   };
 
-  const addDevice = (device: Device) => {
-    setDiscoveredDevices(prev => prev.map(d => 
-      d.id === device.id 
-        ? { ...d, status: 'analyzing' as const }
-        : d
-    ));
-
-    // Simulate device setup
-    setTimeout(() => {
-      setDiscoveredDevices(prev => prev.filter(d => d.id !== device.id));
-      toast({
-        title: "Device Added Successfully!",
-        description: `${device.name} has been added to your network and is ready to use.`
-      });
-    }, 2000);
-  };
-
-  const viewDeviceDetails = (device: Device) => {
-    setSelectedDevice(device);
-  };
-
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'ready':
         return <Badge className="bg-success text-success-foreground">Ready to Add</Badge>;
       case 'analyzing':
-        return <Badge variant="secondary">
-          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-          Analyzing...
-        </Badge>;
+        return <Badge variant="secondary">Analyzing...</Badge>;
       case 'discovered':
         return <Badge variant="outline">Discovered</Badge>;
       default:
@@ -287,64 +248,14 @@ export function AIDiscovery() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline" size="sm" onClick={() => viewDeviceDetails(device)}>
-                          <Eye className="w-4 h-4 mr-2" />
-                          Details
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle className="font-heading">{device.name} Details</DialogTitle>
-                          <DialogDescription className="font-body">
-                            Device information and setup options
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <h4 className="font-medium font-body text-sm mb-1">Brand</h4>
-                              <p className="text-sm text-muted-foreground">{device.brand}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-medium font-body text-sm mb-1">Type</h4>
-                              <p className="text-sm text-muted-foreground">{device.type}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-medium font-body text-sm mb-1">Protocol</h4>
-                              <p className="text-sm text-muted-foreground">{device.protocol}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-medium font-body text-sm mb-1">Signal Strength</h4>
-                              <p className="text-sm text-muted-foreground">{device.strength}%</p>
-                            </div>
-                          </div>
-                          <div>
-                            <h4 className="font-medium font-body text-sm mb-2">Features</h4>
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2">
-                                <CheckCircle className="w-4 h-4 text-success" />
-                                <span className="text-sm">Auto-configuration supported</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <CheckCircle className="w-4 h-4 text-success" />
-                                <span className="text-sm">Voice control compatible</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <CheckCircle className="w-4 h-4 text-success" />
-                                <span className="text-sm">Mobile app integration</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                    <Button variant="outline" size="sm">
+                      <Eye className="w-4 h-4 mr-2" />
+                      Details
+                    </Button>
                     <Button 
                       className="btn-primary" 
                       size="sm"
                       disabled={device.status !== 'ready'}
-                      onClick={() => addDevice(device)}
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       Add Device

@@ -43,21 +43,21 @@ export function DashboardHeader() {
   };
 
   return (
-    <header className="h-16 border-b border-border bg-card/50 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
+    <header className="h-14 sm:h-16 border-b border-border bg-card/50 backdrop-blur-sm flex items-center justify-between px-3 sm:px-4 md:px-6">
       {/* Left Section */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
         {/* Spacer for mobile hamburger */}
-        <div className="w-9 lg:hidden"></div>
+        <div className="w-9 lg:hidden flex-shrink-0"></div>
         
         {/* Search */}
-        <div className="relative w-full max-w-sm md:w-80">
+        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-80 flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Search devices, automations..."
+            placeholder="Search devices..."
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
-            className="pl-10 h-9 bg-muted/50 border-border/50 focus:bg-background font-body"
+            className="pl-10 h-8 sm:h-9 text-sm bg-muted/50 border-border/50 focus:bg-background font-body"
           />
           {searchResults.length > 0 && (
             <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-md shadow-lg z-50 max-h-40 overflow-y-auto">
@@ -72,18 +72,18 @@ export function DashboardHeader() {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
         {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="relative p-2 h-9 w-9">
-              <Bell className="w-4 h-4" />
-              <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-destructive text-destructive-foreground">
+            <Button variant="ghost" size="sm" className="relative p-1.5 sm:p-2 h-8 w-8 sm:h-9 sm:w-9">
+              <Bell className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <Badge className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 h-4 w-4 sm:h-5 sm:w-5 rounded-full p-0 flex items-center justify-center text-xs bg-destructive text-destructive-foreground">
                 3
               </Badge>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80">
+          <DropdownMenuContent align="end" className="w-72 sm:w-80">
             <DropdownMenuLabel className="font-heading">Notifications</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="space-y-2 p-2">
@@ -109,15 +109,15 @@ export function DashboardHeader() {
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="flex items-center gap-2 h-9 px-3">
-              <div className="w-7 h-7 bg-gradient-primary rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-white" />
+            <Button variant="ghost" className="flex items-center gap-1 sm:gap-2 h-8 sm:h-9 px-2 sm:px-3">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 bg-gradient-primary rounded-full flex items-center justify-center">
+                <User className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
               </div>
-              <div className="hidden md:block text-left">
+              <div className="hidden lg:block text-left">
                 <p className="text-sm font-medium font-body">Alex Johnson</p>
                 <p className="text-xs text-muted-foreground">alex@example.com</p>
               </div>
-              <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground hidden sm:block" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">

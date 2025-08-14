@@ -51,12 +51,12 @@ export function MobileSidebar() {
           <Button
             variant="ghost"
             size="icon"
-            className="fixed top-4 left-4 z-50 h-9 w-9 lg:hidden"
+            className="fixed top-3 sm:top-4 left-3 sm:left-4 z-50 h-8 w-8 sm:h-9 sm:w-9 lg:hidden"
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-72 p-0 bg-card/95 backdrop-blur-sm">
+        <SheetContent side="left" className="w-64 sm:w-72 p-0 bg-card/95 backdrop-blur-sm">
           {/* Header */}
           <div className="p-4 border-b border-border">
             <div className="flex items-center gap-3">

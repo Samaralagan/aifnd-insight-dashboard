@@ -138,30 +138,30 @@ export function CrossDeviceAutomation() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-bold mb-2">Cross-Device Automation</h1>
-          <p className="text-muted-foreground font-body">
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">Cross-Device Automation</h1>
+          <p className="text-sm sm:text-base text-muted-foreground font-body">
             Create intelligent workflows using natural language to automate your smart home.
           </p>
         </div>
-        <Button className="btn-primary" onClick={() => setShowCreateForm(true)}>
+        <Button className="btn-primary w-full sm:w-auto" onClick={() => setShowCreateForm(true)}>
           <Plus className="w-4 h-4 mr-2" />
           Create Automation
         </Button>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
         <Card className="card-premium">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-primary" />
+          <CardContent className="p-3 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-bold font-heading">{automations.length}</p>
-                <p className="text-sm text-muted-foreground font-body">Total Automations</p>
+                <p className="text-xl sm:text-2xl font-bold font-heading">{automations.length}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground font-body">Total Automations</p>
               </div>
             </div>
           </CardContent>
@@ -259,7 +259,7 @@ export function CrossDeviceAutomation() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {quickTemplates.map((template, index) => (
                 <div 
                   key={template.name}
@@ -311,10 +311,10 @@ export function CrossDeviceAutomation() {
                     </div>
                     <p className="text-muted-foreground font-body mb-3">{automation.description}</p>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                       <div>
                         <h5 className="font-medium font-body text-sm mb-2">Trigger:</h5>
-                        <p className="text-sm text-muted-foreground font-body bg-muted/50 p-2 rounded">
+                        <p className="text-xs sm:text-sm text-muted-foreground font-body bg-muted/50 p-2 rounded">
                           {automation.trigger}
                         </p>
                       </div>
@@ -322,7 +322,7 @@ export function CrossDeviceAutomation() {
                         <h5 className="font-medium font-body text-sm mb-2">Actions:</h5>
                         <div className="space-y-1">
                           {automation.actions.map((action, idx) => (
-                            <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground font-body">
+                            <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground font-body">
                               <ArrowRight className="w-3 h-3" />
                               {action}
                             </div>
@@ -333,36 +333,38 @@ export function CrossDeviceAutomation() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground font-body">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-border gap-3 sm:gap-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground font-body">
                     {automation.lastRun && (
                       <span>Last run: {automation.lastRun}</span>
                     )}
                     <span>Executions: {automation.runCount}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm">
-                      <Edit2 className="w-4 h-4 mr-2" />
-                      Edit
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button variant="outline" size="sm" className="text-xs">
+                      <Edit2 className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Edit</span>
                     </Button>
                     <Button 
                       variant="outline" 
                       size="sm"
+                      className="text-xs"
                       onClick={() => toggleAutomation(automation.id)}
                     >
                       {automation.status === 'active' ? (
-                        <><Pause className="w-4 h-4 mr-2" />Pause</>
+                        <><Pause className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" /><span className="hidden sm:inline">Pause</span></>
                       ) : (
-                        <><Play className="w-4 h-4 mr-2" />Activate</>
+                        <><Play className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" /><span className="hidden sm:inline">Activate</span></>
                       )}
                     </Button>
                     <Button 
                       variant="outline" 
                       size="sm"
+                      className="text-xs"
                       onClick={() => deleteAutomation(automation.id)}
                     >
-                      <Trash2 className="w-4 h-4 mr-2" />
-                      Delete
+                      <Trash2 className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Delete</span>
                     </Button>
                   </div>
                 </div>

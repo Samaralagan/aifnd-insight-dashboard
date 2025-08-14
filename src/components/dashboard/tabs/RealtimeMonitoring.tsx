@@ -190,35 +190,35 @@ export function RealtimeMonitoring() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-bold mb-2">Real-Time Monitoring</h1>
-          <p className="text-muted-foreground font-body">
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">Real-Time Monitoring</h1>
+          <p className="text-sm sm:text-base text-muted-foreground font-body">
             Live status and performance metrics for all connected devices.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="text-right">
-            <p className="text-sm font-body">Last updated</p>
+            <p className="text-xs sm:text-sm font-body">Last updated</p>
             <p className="text-xs text-muted-foreground">{lastUpdated.toLocaleTimeString()}</p>
           </div>
-          <Button variant="outline" onClick={refreshData} disabled={isRefreshing}>
-            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-            Refresh
+          <Button variant="outline" size="sm" onClick={refreshData} disabled={isRefreshing}>
+            <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 sm:mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">Refresh</span>
           </Button>
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
         <Card className="card-premium">
-          <CardContent className="p-6">
+          <CardContent className="p-3 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium font-body text-muted-foreground">Total Devices</p>
-                <p className="text-2xl font-bold font-heading">{summaryStats.total}</p>
+                <p className="text-xs sm:text-sm font-medium font-body text-muted-foreground">Total Devices</p>
+                <p className="text-xl sm:text-2xl font-bold font-heading">{summaryStats.total}</p>
               </div>
-              <Activity className="w-8 h-8 text-primary" />
+              <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -276,20 +276,20 @@ export function RealtimeMonitoring() {
                 className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors animate-scale-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
-                      <device.icon className="w-5 h-5 text-primary" />
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-3">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                      <device.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="font-medium font-body">{device.name}</h4>
-                      <p className="text-sm text-muted-foreground font-body">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium font-body truncate">{device.name}</h4>
+                      <p className="text-xs sm:text-sm text-muted-foreground font-body">
                         {device.room} • {device.type}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 flex-shrink-0">
                     {/* Battery */}
                     {device.battery && (
                       <div className="flex items-center gap-1">
@@ -317,7 +317,7 @@ export function RealtimeMonitoring() {
                 </div>
 
                 {/* Metrics */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-3">
                   {Object.entries(device.metrics).map(([key, metric]) => (
                     <div key={key} className="space-y-1">
                       <div className="flex items-center justify-between">

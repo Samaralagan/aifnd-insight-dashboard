@@ -144,20 +144,20 @@ export function TailoredSettings() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-bold mb-2">Tailored Settings</h1>
-          <p className="text-muted-foreground font-body">
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">Tailored Settings</h1>
+          <p className="text-sm sm:text-base text-muted-foreground font-body">
             Customize device parameters and preferences for optimal performance.
           </p>
         </div>
         {hasUnsavedChanges && (
-          <div className="flex items-center gap-2">
-            <Button variant="outline" onClick={() => setHasUnsavedChanges(false)}>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => setHasUnsavedChanges(false)}>
               <RotateCcw className="w-4 h-4 mr-2" />
               Discard Changes
             </Button>
-            <Button className="btn-primary" onClick={saveAllSettings}>
+            <Button className="btn-primary" size="sm" onClick={saveAllSettings}>
               <Save className="w-4 h-4 mr-2" />
               Save All Settings
             </Button>
@@ -182,30 +182,30 @@ export function TailoredSettings() {
         {devices.map((device, index) => (
           <Card key={device.id} className="card-premium animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
-                    <device.icon className="w-5 h-5 text-primary" />
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                    <device.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   </div>
-                  <div>
-                    <CardTitle className="font-heading">{device.name}</CardTitle>
-                    <CardDescription className="font-body flex items-center gap-2">
+                  <div className="flex-1 min-w-0">
+                    <CardTitle className="font-heading text-base sm:text-lg truncate">{device.name}</CardTitle>
+                    <CardDescription className="font-body flex items-center gap-2 text-xs sm:text-sm">
                       {device.room} • {device.type}
                       {getStatusIndicator(device.status)}
                       <span className="text-xs">{device.status}</span>
                     </CardDescription>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   {device.battery && (
                     <div className="flex items-center gap-1">
-                      <Battery className={`w-4 h-4 ${getBatteryColor(device.battery)}`} />
-                      <span className={`text-sm font-body ${getBatteryColor(device.battery)}`}>
+                      <Battery className={`w-3 h-3 sm:w-4 sm:h-4 ${getBatteryColor(device.battery)}`} />
+                      <span className={`text-xs sm:text-sm font-body ${getBatteryColor(device.battery)}`}>
                         {device.battery}%
                       </span>
                     </div>
                   )}
-                  <Badge variant={device.status === 'online' ? 'default' : 'destructive'}>
+                  <Badge variant={device.status === 'online' ? 'default' : 'destructive'} className="text-xs">
                     {device.status === 'online' ? 'Connected' : 'Offline'}
                   </Badge>
                 </div>
@@ -269,7 +269,7 @@ export function TailoredSettings() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <Button variant="outline" className="h-auto p-4 flex flex-col items-start">
               <Lightbulb className="w-5 h-5 mb-2 text-primary" />
               <h4 className="font-medium font-body">Evening Mode</h4>

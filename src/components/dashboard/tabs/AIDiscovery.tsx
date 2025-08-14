@@ -131,20 +131,20 @@ export function AIDiscovery() {
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
       <div>
-        <h1 className="font-heading text-3xl font-bold mb-2">AI Device Discovery</h1>
-        <p className="text-muted-foreground font-body">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">AI Device Discovery</h1>
+        <p className="text-sm sm:text-base text-muted-foreground font-body">
           Automatically discover and configure IoT devices on your network using AI.
         </p>
       </div>
 
       {/* Device Type Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         {deviceTypes.map((type, index) => (
           <Card key={type.name} className="card-premium text-center hover-lift" style={{ animationDelay: `${index * 0.1}s` }}>
-            <CardContent className="p-4">
-              <type.icon className={`w-8 h-8 mx-auto mb-2 ${type.color}`} />
-              <h3 className="font-medium font-body text-sm">{type.name}</h3>
-              <p className="text-2xl font-bold font-heading">{type.count}</p>
+            <CardContent className="p-3 sm:p-4">
+              <type.icon className={`w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 ${type.color}`} />
+              <h3 className="font-medium font-body text-xs sm:text-sm truncate">{type.name}</h3>
+              <p className="text-xl sm:text-2xl font-bold font-heading">{type.count}</p>
             </CardContent>
           </Card>
         ))}
@@ -222,21 +222,22 @@ export function AIDiscovery() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {discoveredDevices.map((device, index) => (
                 <div 
                   key={device.id} 
-                  className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors animate-scale-in"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors animate-scale-in gap-3 sm:gap-4"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-                      <device.icon className="w-6 h-6 text-primary" />
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                      <device.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="font-medium font-body">{device.name}</h4>
-                      <p className="text-sm text-muted-foreground font-body">
-                        {device.brand} • {device.type} • {device.protocol}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium font-body truncate">{device.name}</h4>
+                      <p className="text-xs sm:text-sm text-muted-foreground font-body">
+                        <span className="hidden sm:inline">{device.brand} • {device.type} • {device.protocol}</span>
+                        <span className="sm:hidden">{device.brand} • {device.type}</span>
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <div className="flex items-center gap-1">
@@ -247,18 +248,19 @@ export function AIDiscovery() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm">
-                      <Eye className="w-4 h-4 mr-2" />
-                      Details
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                      <Eye className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Details</span>
                     </Button>
                     <Button 
-                      className="btn-primary" 
+                      className="btn-primary text-xs sm:text-sm" 
                       size="sm"
                       disabled={device.status !== 'ready'}
                     >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add Device
+                      <Plus className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Add Device</span>
+                      <span className="sm:hidden">Add</span>
                     </Button>
                   </div>
                 </div>

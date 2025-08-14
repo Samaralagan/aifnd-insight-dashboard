@@ -208,10 +208,10 @@ export function SecurityHealth() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-bold mb-2">Security & Network Health</h1>
-          <p className="text-muted-foreground font-body">
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">Security & Network Health</h1>
+          <p className="text-sm sm:text-base text-muted-foreground font-body">
             Monitor network security, device vulnerabilities, and system health in real-time.
           </p>
         </div>
@@ -235,16 +235,16 @@ export function SecurityHealth() {
       </div>
 
       {/* Security Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
         {securityMetrics.map((metric, index) => (
           <Card key={metric.label} className="card-premium animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium font-body text-sm">{metric.label}</h3>
-                <div className={`w-3 h-3 rounded-full ${metric.color.replace('text-', 'bg-')}`}></div>
+                <h3 className="font-medium font-body text-xs sm:text-sm truncate">{metric.label}</h3>
+                <div className={`w-3 h-3 rounded-full ${metric.color.replace('text-', 'bg-')} flex-shrink-0`}></div>
               </div>
               <div className="space-y-1">
-                <p className={`text-2xl font-bold font-heading ${metric.color}`}>
+                <p className={`text-lg sm:text-2xl font-bold font-heading ${metric.color}`}>
                   {metric.value}{metric.isPercentage ? '%' : `/${metric.total}`}
                 </p>
                 {!metric.isPercentage && (
@@ -395,7 +395,7 @@ export function SecurityHealth() {
                 Your network security is <strong>{networkHealth >= 80 ? 'Good' : networkHealth >= 60 ? 'Fair' : 'Poor'}</strong>. 
                 {networkHealth < 80 && ' Consider addressing the security alerts above to improve your score.'}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-success" />
                   <span className="text-sm font-body">Firewall Active</span>

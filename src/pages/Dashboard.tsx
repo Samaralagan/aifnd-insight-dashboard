@@ -18,9 +18,9 @@ const Dashboard = () => {
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
         <MobileSidebar />
-        <div className="flex-1 flex flex-col lg:ml-0">
+        <div className="flex-1 flex flex-col min-w-0">
           <DashboardHeader />
-          <main className="flex-1 p-4 md:p-6 overflow-auto">
+          <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto">
             <Routes>
               <Route index element={<AIDiscovery />} />
               <Route path="ai-discovery" element={<AIDiscovery />} />
@@ -35,7 +35,7 @@ const Dashboard = () => {
           
           {/* Footer */}
           <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
-            <div className="px-6 py-4">
+            <div className="px-3 sm:px-4 md:px-6 py-4">
               <p className="text-xs text-muted-foreground font-body text-center">
                 © AIFND.net 2025 — All Rights Reserved
               </p>

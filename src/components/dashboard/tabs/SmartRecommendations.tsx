@@ -121,23 +121,23 @@ export function SmartRecommendations() {
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
       <div>
-        <h1 className="font-heading text-3xl font-bold mb-2">Smart Recommendations</h1>
-        <p className="text-muted-foreground font-body">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">Smart Recommendations</h1>
+        <p className="text-sm sm:text-base text-muted-foreground font-body">
           AI-powered suggestions to optimize your smart home setup and automation.
         </p>
       </div>
 
       {/* Category Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {categories.map((category, index) => (
           <Card key={category.title} className="card-premium hover-lift" style={{ animationDelay: `${index * 0.1}s` }}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <category.icon className={`w-8 h-8 ${category.color}`} />
-                <Badge variant="secondary">{category.recommendations} ideas</Badge>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <category.icon className={`w-6 h-6 sm:w-8 sm:h-8 ${category.color}`} />
+                <Badge variant="secondary" className="text-xs">{category.recommendations} ideas</Badge>
               </div>
-              <h3 className="font-heading font-semibold mb-2">{category.title}</h3>
-              <p className="text-sm text-muted-foreground font-body mb-3">{category.description}</p>
+              <h3 className="font-heading font-semibold mb-2 text-sm sm:text-base">{category.title}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground font-body mb-3">{category.description}</p>
               <div className="text-xs font-medium text-primary font-body">{category.savings}</div>
             </CardContent>
           </Card>
@@ -192,22 +192,22 @@ export function SmartRecommendations() {
                     <p className="text-muted-foreground font-body mb-3">{recommendation.description}</p>
                     
                     {/* Metrics */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4">
                       <div className="flex items-center gap-2">
                         <Zap className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-body">
+                        <span className="text-xs sm:text-sm font-body">
                           <strong>Impact:</strong> {recommendation.impact}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-body">
+                        <span className="text-xs sm:text-sm font-body">
                           <strong>Setup:</strong> {recommendation.setup_time}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Star className={`w-4 h-4 ${getConfidenceColor(recommendation.confidence)}`} />
-                        <span className="text-sm font-body">
+                        <span className="text-xs sm:text-sm font-body">
                           <strong>Confidence:</strong> {recommendation.confidence}%
                         </span>
                       </div>
@@ -228,15 +228,16 @@ export function SmartRecommendations() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-border gap-3 sm:gap-0">
                   <Badge variant="secondary">{recommendation.category}</Badge>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="text-xs sm:text-sm">
                       Learn More
                     </Button>
-                    <Button className="btn-primary" size="sm">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Apply Setup
+                    <Button className="btn-primary text-xs sm:text-sm" size="sm">
+                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Apply Setup</span>
+                      <span className="sm:hidden">Apply</span>
                     </Button>
                   </div>
                 </div>

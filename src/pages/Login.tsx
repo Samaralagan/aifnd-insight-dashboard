@@ -28,15 +28,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-3 sm:p-4">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-accent-1/20 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent-2/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-primary/10 rounded-full blur-xl animate-float" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-24 h-24 sm:w-32 sm:h-32 bg-accent-1/20 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-32 h-32 sm:w-40 sm:h-40 bg-accent-2/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 sm:w-24 sm:h-24 bg-primary/10 rounded-full blur-xl animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
         {/* Illustration */}
         <div className="hidden lg:block animate-fade-in">
           <img 
@@ -47,7 +47,7 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <div className="w-full max-w-md mx-auto space-y-8">
+        <div className="w-full max-w-md mx-auto space-y-6 sm:space-y-8">
           {/* Logo Section */}
           <div className="text-center animate-fade-in">
             <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-lg">

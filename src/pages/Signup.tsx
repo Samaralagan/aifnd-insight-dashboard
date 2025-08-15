@@ -33,7 +33,15 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
+    <div 
+      className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${signupIllustration})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-32 h-32 bg-accent-1/20 rounded-full blur-2xl animate-float"></div>
@@ -41,18 +49,9 @@ const Signup = () => {
         <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-secondary/20 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Illustration */}
-        <div className="hidden lg:block animate-fade-in">
-          <img 
-            src={signupIllustration} 
-            alt="Smart Home Network"
-            className="w-full h-auto rounded-2xl shadow-2xl"
-          />
-        </div>
-
+      <div className="relative z-10 w-full max-w-md mx-auto">
         {/* Signup Form */}
-        <div className="w-full max-w-md mx-auto space-y-8">
+        <div className="w-full space-y-8">
           {/* Logo Section */}
           <div className="text-center animate-fade-in">
             <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-lg">

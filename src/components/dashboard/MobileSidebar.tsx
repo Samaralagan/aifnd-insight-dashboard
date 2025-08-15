@@ -19,13 +19,13 @@ import {
 } from "lucide-react";
 
 const navigationItems = [
-  { title: "AI-Powered Device Discovery", url: "/dashboard/ai-discovery", icon: Search },
-  { title: "Smart Categorization & Recommendations", url: "/dashboard/smart-recommendations", icon: Sparkles },
-  { title: "Tailored Device Settings", url: "/dashboard/tailored-settings", icon: Settings },
-  { title: "Real-Time Monitoring & Control", url: "/dashboard/realtime-monitoring", icon: Activity },
-  { title: "Cross-Device Automation", url: "/dashboard/automation", icon: Zap },
-  { title: "Integration Support", url: "/dashboard/integrations", icon: Plug },
-  { title: "Security & Network Health", url: "/dashboard/security", icon: Shield },
+  { title: "Device Discovery", url: "/dashboard/ai-discovery", icon: Search },
+  { title: "Smart Recommendations", url: "/dashboard/smart-recommendations", icon: Sparkles },
+  { title: "Device Settings", url: "/dashboard/tailored-settings", icon: Settings },
+  { title: "Monitoring & Control", url: "/dashboard/realtime-monitoring", icon: Activity },
+  { title: "Automation", url: "/dashboard/automation", icon: Zap },
+  { title: "Integrations", url: "/dashboard/integrations", icon: Plug },
+  { title: "Security & Health", url: "/dashboard/security", icon: Shield },
 ];
 
 export function MobileSidebar() {

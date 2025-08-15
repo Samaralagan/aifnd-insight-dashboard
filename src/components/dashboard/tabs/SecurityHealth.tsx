@@ -285,28 +285,30 @@ export function SecurityHealth() {
             Recent security notifications and recommended actions
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-4 sm:p-6">
+          <div className="space-y-3 sm:space-y-4">
             {alerts.map((alert, index) => (
               <div 
                 key={alert.id}
-                className={`flex items-start gap-4 p-4 border rounded-lg transition-colors animate-scale-in ${
+                className={`flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-3 sm:p-4 border rounded-lg transition-colors animate-scale-in ${
                   alert.resolved ? 'bg-muted/30 border-muted' : 'hover:bg-muted/50'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {getAlertIcon(alert.type)}
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className={`font-medium font-body ${alert.resolved ? 'line-through text-muted-foreground' : ''}`}>
+                <div className="flex-shrink-0">
+                  {getAlertIcon(alert.type)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                    <h4 className={`font-medium font-body text-sm sm:text-base ${alert.resolved ? 'line-through text-muted-foreground' : ''}`}>
                       {alert.title}
                     </h4>
-                    {alert.resolved && <Badge variant="outline">Resolved</Badge>}
+                    {alert.resolved && <Badge variant="outline" className="self-start sm:self-center">Resolved</Badge>}
                   </div>
-                  <p className={`text-sm font-body mb-2 ${alert.resolved ? 'text-muted-foreground' : ''}`}>
+                  <p className={`text-xs sm:text-sm font-body mb-2 ${alert.resolved ? 'text-muted-foreground' : ''}`}>
                     {alert.description}
                   </p>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground font-body">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs text-muted-foreground font-body">
                     <span>{alert.timestamp}</span>
                     {alert.device && <span>Device: {alert.device}</span>}
                   </div>
@@ -315,9 +317,10 @@ export function SecurityHealth() {
                   <Button 
                     variant="outline" 
                     size="sm"
+                    className="self-start sm:self-center text-xs"
                     onClick={() => resolveAlert(alert.id)}
                   >
-                    <CheckCircle className="w-4 h-4 mr-2" />
+                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                     Resolve
                   </Button>
                 )}
@@ -329,30 +332,30 @@ export function SecurityHealth() {
 
       {/* Network Devices */}
       <Card className="card-premium">
-        <CardHeader>
-          <CardTitle className="font-heading">Network Devices</CardTitle>
-          <CardDescription className="font-body">
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="font-heading text-base sm:text-lg">Network Devices</CardTitle>
+          <CardDescription className="font-body text-xs sm:text-sm">
             Monitor device security status and firmware updates
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-4 sm:p-6">
+          <div className="space-y-3 sm:space-y-4">
             {networkDevices.map((device, index) => (
               <div 
                 key={device.id}
-                className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors animate-scale-in"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors animate-scale-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
+                <div className="flex items-start gap-3 sm:gap-4 w-full sm:w-auto">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
                     {getDeviceIcon(device.type)}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium font-body">{device.name}</h4>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                      <h4 className="font-medium font-body text-sm sm:text-base truncate">{device.name}</h4>
                       {getStatusBadge(device.status)}
                     </div>
-                    <p className="text-sm text-muted-foreground font-body">
+                    <p className="text-xs sm:text-sm text-muted-foreground font-body">
                       {device.type} • {device.ip} • v{device.firmwareVersion}
                     </p>
                     <p className="text-xs text-muted-foreground font-body">
@@ -360,20 +363,21 @@ export function SecurityHealth() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                   {device.updateAvailable && (
                     <Button 
                       variant="outline" 
                       size="sm"
+                      className="flex-1 sm:flex-none text-xs"
                       onClick={() => updateFirmware(device.id)}
                     >
-                      <Download className="w-4 h-4 mr-2" />
-                      Update Firmware
+                      <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                      Update
                     </Button>
                   )}
-                  <Button variant="outline" size="sm">
-                    <Lock className="w-4 h-4 mr-2" />
-                    Security Settings
+                  <Button variant="outline" size="sm" className="flex-1 sm:flex-none text-xs">
+                    <Lock className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    Settings
                   </Button>
                 </div>
               </div>
